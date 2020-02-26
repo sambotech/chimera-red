@@ -1,0 +1,64 @@
+<body style="background-color: darkgray"
+
+<div class="header">
+    <h1 style="color: darkolivegreen; font-size: 50px">Calculate distance between longitude and latitude coordinates</h1>    
+</div>
+
+<br style = "line-height:5;">
+
+<table>
+  <tr>
+    <td><label id="longa">Longitude point A:</label></td> 
+    <td>&nbsp;&nbsp;&nbsp;</td>
+      <td> <input type="text" id="lonai" ></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><label id="lata">Latitude point A:</label></td>   
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td> <input type="text" id="latai" /> </td>
+  </tr>
+ 
+  <tr1>    
+    <td><label id="longb">Longitude point B:</label></td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td> <input type="text" id="lonbi" /></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><label id="latb">Latitude point B:</label></td>   
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td> <input type="text" id="latbi" /></td>
+  </tr1>
+    
+  <tr2>
+    <td><label id="result">Estimated distance:</label></td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td> <textbox type="text" id="resulto"/></td>
+  </tr2>
+</table>
+
+<br style = "line-height:5;">
+
+<button type="button" onclick="calc()">Click to calculate</button>
+
+<script>
+//    alert("hi");
+//    document.getElementById("resulto").innerHTML = "555";
+
+    
+function calc(){
+    var lonai = document.getElementById("lonai").value;
+    var lonbi = document.getElementById("lonbi").value;
+    var latai = document.getElementById("latai").value;
+    var latbi = document.getElementById("latbi").value;
+	var R = 3959; // miles (change this constant to get miles)
+	var dLat = (latbi-latai) * Math.PI / 180;
+	var dLon = (lonbi-lonai) * Math.PI / 180;
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(latai * Math.PI / 180 ) * Math.cos(latbi * Math.PI / 180 ) *
+		Math.sin(dLon/2) * Math.sin(dLon/2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	var d = R * c; 
+	if (d>1) 
+        document.getElementById("resulto").innerHTML = Math.round(d)+"miles";  
+    if (d<=1)
+        document.getElementById("resulto").innerHTML = Math.round(d*1000)+"ft";    
+}
+</script>
